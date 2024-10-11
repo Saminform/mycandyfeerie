@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message du Père Noël</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="shortcut icon"
+      href="./assets/La_Feerie_des_Lutins__Publication_Facebook_-removebg-preview.webp"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-left">
+        <img
+          src="./assets/La_Feerie_des_Lutins__Publication_Facebook_-removebg-preview.webp"
+          alt="Logo"
+        />
+        <h4>La féérie des lutins</h4>
+      </div>
+      <div class="nav-right">
+        <a href="#">Retour à la boutique</a>
+        <!-- Lien temporaire -->
+      </div>
+    </nav>
+
+    <div id="background-video-container">
+      <video id="background-video" autoplay loop muted playsinline>
+        <source src="./assets/19931-306108622_tiny.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <svg width="100%" height="200" viewBox="0 0 1000 200">
+      <path
+        id="arc-path"
+        d="M 100,150 A 400,400 0 0,1 900,150"
+        fill="transparent"
+      />
+      <text fill="yellow" font-size="50" text-anchor="middle">
+        <textpath href="#arc-path">LA FÉÉRIE DES LUTINS</textpath>
+      </text>
+    </svg>
+
+    <div class="lutin-container"></div>
+    <img src="./assets/lutinChef.png" alt="Lutin assis" class="lutin-image" />
+    <div class="container">
+      <div class="containerL">
+        <h2>COUCOU !</h2>
+        <p>
+          Bienvenue dans l'atelier des lutins ! Ici, tu peux écouter leur
+          message magique, et avec un peu de chance, c'est le
+          <strong>Père Noël</strong> lui-même qui te parlera ! Garde bien
+          l'oreille ouverte !
+        </p>
+      </div>
+      <div class="container-lutinChef">
+        <h2>TON MESSAGE PERSONNALISÉ !</h2>
+        <label>Écrit ton prénom pour écouter ton message</label>
+        <input
+          type="text"
+          id="prenom"
+          placeholder="Votre prénom ici"
+          onkeydown="verifierEntree(event)"
+        />
+        <button id="ecouterBtn">Écouter</button>
+        <img
+          src="./assets/lutinBouton.png"
+          alt="Lutin bouton"
+          class="lutin-bouton"
+        />
+        <img
+          src="./assets/lutinSpeaking.png"
+          alt="Lutin speaking"
+          class="lutin-speaking"
+        />
+      </div>
+
+      <div class="containerR">
+        <h2>VIENT JOUER AVEC NOUS</h2>
+        <p>
+          Remplis le formulaire et éclate un maximum de bulles en 1 minute pour
+          gagner un cadeau d'une valeur de <strong>30 euros !</strong>
+        </p>
+        <p id="clignote">
+          Joue autant de fois que tu veux jusqu'au 15 décembre
+        </p>
+        <a href="jeu-bulles.html" id="jeu-link">Jouer au jeu des bulles</a>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-left">© 2024, My Candy Féerie</div>
+      <div class="footer-center">
+        <a href="https://facebook.com" target="_blank">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+      <div class="footer-right">
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
