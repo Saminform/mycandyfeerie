@@ -177,7 +177,7 @@ nav::before {
   animation-delay: 0s;
 }
 .image-animée:nth-child(3) {
-  animation: bounce 4s ease-in-out infinite, rotation 1s linear infinite;
+  animation: bounce 4s ease-in-out infinite, rotation 0.5s linear infinite;
   animation-delay: 3s, 2.5s; /* Le délai s'applique à chaque animation */
 }
 .image-animée:nth-child(5) {
