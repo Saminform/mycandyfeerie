@@ -53,7 +53,7 @@ function jouerMessage() {
 function genererLutins() {
   const lutinContainer = document.querySelector(".lutin-container");
 
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= 4; i++) {
     const lutin = document.createElement("img");
     lutin.src = "./assets/lutinStar.png";
     lutin.alt = `Lutin animé ${i}`;

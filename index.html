@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Message du Père Noël</title>
+    <title>Message de Noël</title>
     <link rel="stylesheet" href="styles.css" />
     <link
       rel="shortcut icon"
@@ -35,16 +35,14 @@
         <source src="./assets/19931-306108622_tiny.mp4" type="video/mp4" />
       </video>
     </div>
-    <svg width="100%" height="200" viewBox="0 0 1000 200">
-      <path
-        id="arc-path"
-        d="M 100,150 A 400,400 0 0,1 900,150"
-        fill="transparent"
+    <div class="mainUp">
+      <img
+        src="./assets/La_Feerie_des_Lutins__Publication_Facebook_-removebg-preview.webp"
+        alt=""
       />
-      <text fill="yellow" font-size="50" text-anchor="middle">
-        <textpath href="#arc-path">LA FÉÉRIE DES LUTINS</textpath>
-      </text>
-    </svg>
+      <!-- <h1>LA FÉÉRIE DES LUTINS</h1> -->
+    </div>
+    <img src="./assets/lutinListen.png" alt="LutinListen" class="lutinListen" />
 
     <div class="lutin-container"></div>
     <img src="./assets/lutinChef.png" alt="Lutin assis" class="lutin-image" />
@@ -74,9 +72,9 @@
           class="lutin-bouton"
         />
         <img
-          src="./assets/lutinSpeaking.png"
-          alt="Lutin speaking"
-          class="lutin-speaking"
+          src="./assets/lutinHeadSpeaking.png"
+          alt="LutinHead"
+          class="lutinHead"
         />
       </div>
 
@@ -89,9 +87,12 @@
         <p id="clignote">
           Joue autant de fois que tu veux jusqu'au 15 décembre
         </p>
-        <a href="jeu-bulles.html" id="jeu-link">Jouer au jeu des bulles</a>
+        <button class="btn" onclick="window.location.href='jeu-bulles.html'">
+          Jouer au jeu des bulles
+        </button>
       </div>
     </div>
+    <h1>LA FÉÉRIE DES LUTINS</h1>
 
     <footer>
       <div class="footer-left">© 2024, My Candy Féerie</div>
@@ -101,6 +102,9 @@
         </a>
         <a href="https://instagram.com" target="_blank">
           <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com" target="_blank">
+          <i class="fab fa-tiktok"></i>
         </a>
       </div>
       <div class="footer-right">
