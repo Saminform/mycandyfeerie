@@ -62,6 +62,12 @@ function genererLutins() {
   }
 }
 
+// Appliquer CircleType pour courber le texte "La féérie des lutins"
+function courberTexte() {
+  const element = document.getElementById("arche");
+  new CircleType(element).radius(180); // Appliquer un rayon de 300px à l'arche
+}
+
 // Gérer la touche "Entrée" et le bouton "Écouter"
 function ajouterEventListeners() {
   const prenomInput = document.getElementById("prenom");
@@ -84,4 +90,5 @@ window.onload = function () {
   chargerVoix();
   ajouterEventListeners();
   genererLutins(); // Générer les lutins à l'ouverture de la page
+  courberTexte(); // Courber le texte une fois la page chargée
 };
