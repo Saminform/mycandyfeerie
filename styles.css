@@ -81,17 +81,16 @@ nav::before {
 /* Conteneur principal */
 .container {
   position: relative;
-  max-height: 50vh; 
-  top: 2vh; /* Positionne le container à 10% de la hauteur de l'écran */
-  width: 90vw; /* Utilise 80% de la largeur de l'écran */
+  max-height: 50vh;
+  top: 2vh;
+  width: 90vw;
   display: flex;
   justify-content: space-around;
   align-items: stretch;
   box-sizing: border-box;
-  margin: 0 auto; 
+  margin: 0 auto;
   padding: 20px;
 }
-
 
 .containerL,
 .containerR,
@@ -230,11 +229,11 @@ nav::before {
 .lutin-chef {
   z-index: 2;
   position: absolute;
-  top: 32%; 
-  left: 50%; 
-  transform: translate(-50%, -50%); 
-  width: 20vw; 
-  max-width: 300px; 
+  top: 32%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20vw;
+  max-width: 300px;
 }
 
 .lutin-bouton {
@@ -242,14 +241,12 @@ nav::before {
   width: 30%;
 }
 .lutinHead {
-  width: 200px;
   position: absolute;
-  top: 76%; /* Centre verticalement */
-  left: 80%; /* Centre horizontalement */
-  transform: translate(
-    -50%,
-    -50%
-  ); /* Ajuste pour centrer exactement au milieu */
+  bottom: 0;
+  left: 60%;
+  width: 35%;
+  height: auto;
+  max-width: 100%;
 }
 
 .lutinListen {
@@ -262,12 +259,12 @@ nav::before {
 /* Styles des titres, labels, et boutons */
 h1 {
   position: absolute;
-  top: 8vh; 
-  left: 50vw; 
-  transform: translateX(-50%); 
-  font-size: 3rem; 
-  color: #ff0000; 
-  text-shadow: 2px 2px 5px #bb2649; 
+  top: 8vh;
+  left: 50vw;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  color: #ff0000;
+  text-shadow: 2px 2px 5px #bb2649;
 }
 #arche {
   z-index: 20;
@@ -431,15 +428,9 @@ footer::before {
 /* ********************MEDIA QUERIES******************* */
 
 @media screen and (max-width: 1650px) {
-  .lutinListen {
-    margin-left: 800px;
-    margin-top: -450px;
-    width: 50%;
-  }
-
   .container h2,
-  .container label {
-    font-size: 1.1rem;
+  label {
+    font-size: 1.4rem;
   }
 
   .mainUp img {
@@ -451,13 +442,289 @@ footer::before {
   .container-lutinChef {
     margin: 15px;
   }
+}
 
+@media screen and (max-width: 1180px) {
+  .container h2 {
+    font-size: 1.1rem;
+  }
+  .container p,
+  .container label {
+    font-size: 20px;
+    margin: auto;
+  }
 
-
-  .container {
+  .containerR button {
     width: 90%;
+    margin-top: 5px;
   }
 }
 
+/* *********************tablette********************* */
+@media screen and (max-width: 1024px) {
+  /* Ajustements pour tablettes */
+  .container {
+    width: 95vw;
+    margin: 0 auto;
+    padding: 10px;
+    flex-direction: column;
+  }
+
+  .containerL,
+  .containerR,
+  .container-lutinChef {
+    margin: 10px;
+    width: 90%;
+    padding: 15px;
+  }
+
+  .mainUp img {
+    width: 180px;
+    left: 5vh; /* Ajustement de la position pour les tablettes */
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .lutin-chef {
+    width: 25vw;
+  }
+
+  .nav-right a {
+    font-size: 16px;
+    padding: 10px 30px; /* Espacer un peu plus les liens de navigation */
+  }
+}
+
+/* ***********tablette smarphone horizontal************* */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .lutinListen {
+    display: none;
+  }
+  #arche {
+    font-size: 2.5rem;
+  }
+  .container h2 {
+    font-size: 1.5rem;
+  }
+
+  .mainUp img {
+    position: fixed;
+    top: 15vh;
+    left: 1vh;
+    width: 200px;
+    z-index: 10;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .containerL,
+  .containerR,
+  .container-lutinChef {
+    padding: 5px 30px 30px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+/* Ajout d'un media query pour tablettes */
 @media screen and (min-width: 750px) {
-  
+}
+
+/* Responsive pour smartphone */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-right a {
+    font-size: 14px;
+    padding: 5px 20px;
+  }
+
+  .container {
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .containerL,
+  .containerR,
+  .container-lutinChef {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  .mainUp img {
+    width: 150px;
+    left: 0;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .lutin-chef {
+    top: 50%;
+    width: 50vw; /* Plus petit pour mobile */
+  }
+
+  .lutinListen {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* **********************smartphone************************ */
+@media screen and (max-width: 768px) {
+  /* Ajustements pour mobile */
+  body {
+    padding-top: 40vh;
+    bottom: 100vh;
+    overflow: auto;
+    height: auto;
+    background-image: url(./assets/cadeaux.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    #background-video-container {
+      display: none;
+    }
+
+    .lutinListen {
+      display: none;
+    }
+
+    nav {
+      flex-direction: column; /* Aligner les éléments de navigation en colonne */
+      align-items: center;
+    }
+
+    .nav-right a {
+      font-size: 14px;
+      padding: 5px 20px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    .mainUp img {
+      width: 150px;
+      margin: 0 auto;
+      position: relative;
+      left: 0; /* Centrer l'image principale */
+    }
+
+    .lutin-chef {
+      top: 50%;
+      width: 50vw; /* Plus petit pour mobile */
+    }
+
+    .lutinListen {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .container {
+      flex-direction: column;
+      align-items: center; /* Centrer tous les conteneurs */
+      padding: 10px;
+      width: 100%; /* S'assurer que le conteneur occupe toute la largeur */
+    }
+
+    .containerL,
+    .containerR,
+    .container-lutinChef {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+    }
+
+    /* Réduction de la taille des boutons */
+    button {
+      width: 100%; /* Occuper toute la largeur sur mobile */
+      margin: 10px 0;
+    }
+
+    /* Ajustement des textes et étiquettes */
+    p,
+    label {
+      font-size: 14px; /* Réduire la taille du texte sur les petits écrans */
+    }
+
+    .lutin-bouton,
+    .lutinHead {
+      width: 25vw; /* Réduire la taille des images des lutins sur mobile */
+    }
+  }
+}
+
+/* ********************petit smartphone******************* */
+@media screen and (max-width: 480px) {
+  /* Ajustements pour les petits smartphones */
+  h1 {
+    font-size: 1.5rem; /* Plus petit pour les petits écrans */
+  }
+
+  p,
+  label {
+    font-size: 12px; /* Réduire encore plus les textes */
+  }
+
+  .mainUp img {
+    width: 120px; /* Réduire la taille des images principales */
+    left: 0;
+    margin: 0 auto; /* Centrer l'image */
+  }
+
+  .container {
+    padding: 5px; /* Réduire le padding pour s’adapter aux petits écrans */
+  }
+
+  .containerL,
+  .containerR,
+  .container-lutinChef {
+    width: 100%; /* Occuper toute la largeur */
+    margin: 5px 0;
+    padding: 5px;
+  }
+
+  .lutin-chef {
+    width: 60vw; /* Plus petit pour les petits smartphones */
+  }
+
+  .lutinListen {
+    width: 90vw; /* Réduire la taille de l'image lutin pour ces écrans */
+    margin-left: 0;
+  }
+
+  button {
+    font-size: 14px; /* Réduire la taille des boutons */
+    width: 100%; /* Bouton prend toute la largeur */
+  }
+
+  .nav-right a {
+    font-size: 12px; /* Texte de la barre de navigation plus petit */
+  }
+
+  .footer-center a {
+    font-size: 20px; /* Réduire la taille des icônes dans le footer */
+  }
+}
