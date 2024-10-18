@@ -49,17 +49,51 @@ function jouerMessage() {
   synth.speak(utterance);
 }
 
-// Génération dynamique des lutins
-function genererLutins() {
+// Fonction pour ajuster dynamiquement le nombre de lutins en fonction de la taille de la fenêtre
+function ajusterNombreLutins() {
   const lutinContainer = document.querySelector(".lutin-container");
 
-  for (let i = 1; i <= 4; i++) {
+  // Supprimer les lutins actuels
+  lutinContainer.innerHTML = "";
+
+  // Calculer le nombre de lutins en fonction de la largeur de la fenêtre
+  const windowWidth = window.innerWidth;
+  let nombreLutins;
+
+  if (windowWidth > 1200) {
+    nombreLutins = 9; // Grand écran
+  } else if (windowWidth > 800) {
+    nombreLutins = 7; // Écran moyen
+  } else if (windowWidth > 600) {
+    nombreLutins = 5; // Petite tablette
+  } else {
+    nombreLutins = 3; // Smartphone
+  }
+
+  // Générer les lutins avec des classes uniques
+  for (let i = 1; i <= nombreLutins; i++) {
     const lutin = document.createElement("img");
     lutin.src = "./assets/lutinStar.png";
     lutin.alt = `Lutin animé ${i}`;
-    lutin.classList.add("image-animée", `delay${i}`);
+    lutin.classList.add("image-animée", `delay${i}`, `lutin-${i}`); // Ajout d'une classe unique
     lutinContainer.appendChild(lutin);
   }
+
+  // Appeler la fonction pour cacher certains lutins en fonction de leur numéro
+  cacherLutinsParNumero();
+}
+
+// Fonction pour rendre invisibles certains lutins (ex : lutins 1, 3, 6, et 8) tout en conservant leur position
+function cacherLutinsParNumero() {
+  // Cacher les lutins 1, 3, 6, et 8
+  const lutinsAEnlever = [1, 2]; // Liste des lutins à cacher
+
+  lutinsAEnlever.forEach((num) => {
+    const lutin = document.querySelector(`.lutin-${num}`);
+    if (lutin) {
+      lutin.style.visibility = "hidden"; // Rend le lutin invisible mais conserve son espace
+    }
+  });
 }
 
 // Appliquer CircleType pour courber le texte "La féérie des lutins"
@@ -89,6 +123,9 @@ window.onload = function () {
   }
   chargerVoix();
   ajouterEventListeners();
-  genererLutins(); // Générer les lutins à l'ouverture de la page
+  ajusterNombreLutins(); // Générer les lutins en fonction de la taille de la fenêtre au chargement
   courberTexte(); // Courber le texte une fois la page chargée
+
+  // Écoute les événements de redimensionnement de la fenêtre pour ajuster les lutins
+  window.addEventListener("resize", ajusterNombreLutins);
 };
