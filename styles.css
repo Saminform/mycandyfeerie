@@ -12,6 +12,7 @@ body {
 .page-deux {
   cursor: crosshair;
 }
+
 /* Ajout des styles pour la barre de navigation */
 nav {
   color: black;
@@ -106,7 +107,9 @@ nav::before {
   z-index: 2;
   text-align: justify;
 }
-
+#lutinNb {
+  display: flex;
+}
 .containerR {
   display: flex;
   flex-direction: column;
@@ -199,6 +202,7 @@ nav::before {
 }
 .image-animée:nth-child(8) {
   animation-delay: 4s;
+  animation: bounce 4s ease-in-out infinite, rotation 2s linear infinite;
 }
 .image-animée:nth-child(10) {
   animation-delay: 4.5s;

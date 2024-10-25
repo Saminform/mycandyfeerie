@@ -86,7 +86,7 @@ function ajusterNombreLutins() {
 // Fonction pour rendre invisibles certains lutins (ex : lutins 1, 3, 6, et 8) tout en conservant leur position
 function cacherLutinsParNumero() {
   // Cacher les lutins 1, 3, 6, et 8
-  const lutinsAEnlever = [1, 2]; // Liste des lutins à cacher
+  const lutinsAEnlever = [1, 9]; // Liste des lutins à cacher
 
   lutinsAEnlever.forEach((num) => {
     const lutin = document.querySelector(`.lutin-${num}`);
