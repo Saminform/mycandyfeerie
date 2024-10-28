@@ -1,7 +1,11 @@
 - mettre à jour règle du jeu   FAIT (mais à relire avec Maurine)
-- faire une div avec le compteur, les 10 premiers gagnants et un lien pour voir les règles du jeu. 
+
+- faire un compteur pour commencer la partie. le compteur se déclanche grace un un bouton intitulé "c'est parti!" 
+
+
+
+les 10 premiers gagnants et un lien pour voir les règles du jeu. 
 - Faire une cible quand la souris arrive sur les bulles
-- mettre le score avec le nom de la personne 
 - faire 10 messages vocaux lutin et 1 papa noël
 - faire le message de présentation avec nom de la personne pour écouter l'un des vocaux. 
-- rendre tout responsive.
+- rendre tout responsive. page lutin de noel (ok)

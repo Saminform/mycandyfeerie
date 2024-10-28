@@ -107,8 +107,13 @@ nav::before {
   z-index: 2;
   text-align: justify;
 }
+
 #lutinNb {
-  display: flex;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: bloc;
+  margin: 10px auto;
 }
 .containerR {
   display: flex;
@@ -116,9 +121,9 @@ nav::before {
   text-align: justify;
   z-index: 2;
 }
-#contp {
+.contp {
   text-align: center;
-  font-size: 15px;
+  font-size: 1.7vh;
 }
 
 .container-lutinChef {
@@ -350,40 +355,6 @@ button:hover {
 
 button:active {
   background-color: #03ff3e;
-}
-
-/* _________________________jeu-bulles____________________ */
-
-h3 {
-  font-size: 10rem;
-  text-align: center;
-  margin-top: 20px;
-  color: rgba(128, 128, 128, 0.555);
-}
-h2 {
-  font-size: 1.8rem;
-  text-align: center;
-  margin-top: 20px;
-  color: yellow;
-  text-shadow: 3px 2px 8px #ff0000;
-}
-
-.bubble {
-  position: absolute;
-  border-radius: 300px;
-  background: rgba(255, 166, 0, 0.6);
-  opacity: 0;
-  animation: anim 8s forwards;
-  filter: hue-rotate(0deg);
-}
-
-@keyframes anim {
-  to {
-    top: -250px;
-    left: var(--left);
-    opacity: 1;
-    filter: hue-rotate(720deg);
-  }
 }
 
 footer {

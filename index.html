@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Féérie des lutins: message</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="./styles/styles.css" />
     <link
       rel="shortcut icon"
       href="./assets/La_Feerie_des_Lutins__Publication_Facebook_-removebg-preview.webp"
@@ -25,8 +25,11 @@
         <h4>La féérie des lutins</h4>
       </div>
       <div class="nav-right">
-        <a href="#">Retour à la boutique</a>
-        <!-- Lien temporaire -->
+        <a
+          href="https://www.mycandyfeerie.com/collections/toute-la-boutique-de-noel"
+          target="_blank"
+          >Retour à la boutique</a
+        >
       </div>
     </nav>
     <h1 id="arche">
@@ -60,10 +63,13 @@
           <strong>Père Noël</strong> lui-même te parlera ! Garde bien l'oreille
           ouverte !
         </p>
-        <p id="contp">
+        <p class="contp">
           As tu compté le nombre de lutin sur l'écran? <br />réponse:
         </p>
-        <button id="lutinNb"></button>
+
+        <a href="lutindenoel.html">
+          <button id="lutinNb">Découvrir</button>
+        </a>
       </div>
       <div class="container-lutinChef">
         <h2>TON MESSAGE PERSONNALISÉ !</h2>
@@ -91,7 +97,9 @@
           <span id="clignote">Mycandyfeerie® </span>
         </p>
 
-        <p id="contp">Joue autant de fois que tu veux jusqu'au 15 décembre</p>
+        <p class="contp">
+          Joue autant de fois que tu veux jusqu'au 15 décembre
+        </p>
         <button class="btn2" onclick="window.location.href='jeu-bulles.html'">
           C'est parti !
         </button>
@@ -101,13 +109,16 @@
     <footer>
       <div class="footer-left">© 2024, Mycandyfeerie®</div>
       <div class="footer-center">
-        <a href="https://facebook.com" target="_blank">
+        <a
+          href="https://www.facebook.com/people/La-F%C3%A9erie-des-Lutins/61565446238261/?_rdr"
+          target="_blank"
+        >
           <i class="fab fa-facebook"></i>
         </a>
-        <a href="https://instagram.com" target="_blank">
+        <a href="https://www.instagram.com/feeriecandy/" target="_blank">
           <i class="fab fa-instagram"></i>
         </a>
-        <a href="https://www.tiktok.com" target="_blank">
+        <a href="https://www.tiktok.com/@mycandyfeerie" target="_blank">
           <i class="fab fa-tiktok"></i>
         </a>
       </div>
@@ -122,6 +133,6 @@
     <!-- CircleType via jsDelivr -->
     <script src="https://cdn.jsdelivr.net/npm/circletype@2.3.0/dist/circletype.min.js"></script>
     <!-- Ton script principal -->
-    <script src="script.js"></script>
+    <script src="./scripts/script.js"></script>
   </body>
 </html>

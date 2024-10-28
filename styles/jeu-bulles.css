@@ -74,11 +74,53 @@ nav::before {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  background-color: rgba(255, 0, 0, 0.9);
+  background-color: rgba(255, 68, 58, 0.9);
   color: white;
   padding: 20px;
   border-radius: 8px;
 }
+
+.intro-screen {
+  z-index: 9;
+}
+
+/* Styles pour les champs de formulaire et le bouton */
+#user-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#user-form input {
+  margin: 5px 0;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+#start-button,
+#replayButton,
+#quit-button {
+  background-color: #4caf50;
+  color: white;
+  font-size: 1rem;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+#quit-button {
+  position: absolute;
+  top: 10%;
+  left: 90%;
+}
+
+#start-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 .overlay-image {
   position: absolute;
   top: 50%;
