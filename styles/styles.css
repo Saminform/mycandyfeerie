@@ -4,13 +4,10 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: auto;
   margin: 0;
   padding: 0;
   overflow: hidden;
-}
-.page-deux {
-  cursor: crosshair;
 }
 
 /* Ajout des styles pour la barre de navigation */
@@ -73,21 +70,32 @@ nav::before {
   width: 100%;
 }
 .mainUp img {
-  top: 1vh;
-  width: 250px;
+  top: 21vh;
+  width: 15vw;
   position: relative;
-  left: 24vh;
+  left: 10vw;
+}
+
+#logwhite {
+  position: absolute;
+  width: 5vw;
+  z-index: 999;
+  top: 10%;
+  left: 47.5%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  opacity: 0.9;
 }
 
 /* Conteneur principal */
 .container {
   position: relative;
-  max-height: 50vh;
-  top: 2vh;
+  max-height: none;
+  height: auto;
+  top: 20vh;
   width: 90vw;
   display: flex;
   justify-content: space-around;
-  align-items: stretch;
   box-sizing: border-box;
   margin: 0 auto;
   padding: 20px;
@@ -102,10 +110,11 @@ nav::before {
   border-radius: 15px;
   padding: 20px;
   box-sizing: border-box;
-  max-width: 40vh;
-  width: 90%;
+  max-width: 60vh;
+  width: 100%;
   z-index: 2;
   text-align: justify;
+  margin: 10px;
 }
 
 #lutinNb {
@@ -135,7 +144,7 @@ nav::before {
 
 /* Vidéo en arrière-plan */
 #background-video-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -169,7 +178,8 @@ nav::before {
   width: 90px;
   height: auto;
   position: relative;
-  animation: bounce 4s ease-in-out infinite;
+  animation: bounce 5s ease-in-out infinite;
+  bottom: -300px;
 }
 
 /* Délais pour l'animation des lutins */
@@ -216,15 +226,18 @@ nav::before {
   border-radius: 50%;
   animation: rotation 20s linear infinite;
 }
+#logwhite {
+  animation: alternateRotation 10s ease-in-out infinite;
+}
 
 /* Animations */
 @keyframes bounce {
   0%,
   100% {
-    bottom: 0;
+    bottom: -400px;
   }
   50% {
-    bottom: 550px;
+    bottom: 500px;
   }
 }
 @keyframes rotation {
@@ -234,6 +247,23 @@ nav::before {
   100% {
     transform: rotate(360deg);
   }
+}
+@keyframes alternateRotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.image-animée {
+  animation: alternateRotation 10s ease-in-out infinite;
+}
+
+.image-animée {
+  animation: alternateRotation 10s ease-in-out infinite;
 }
 
 /* Style commun pour les images du lutin assis et du bouton */
@@ -246,7 +276,7 @@ nav::before {
 .lutin-chef {
   z-index: 3;
   position: absolute;
-  top: 32%;
+  top: -10vh;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 20vw;
@@ -268,8 +298,8 @@ nav::before {
 
 .lutinListen {
   position: absolute;
-  margin-left: 1700px;
-  margin-top: -275px;
+  left: 55vw;
+  top: -30vh;
   width: 1200px;
 }
 
@@ -284,6 +314,9 @@ h1 {
   text-shadow: 2px 2px 5px #bb2649;
 }
 #arche {
+  position: absolute;
+  top: -35vh;
+  left: 50%;
   animation: clignoter-shadow 0.8s infinite alternate;
   z-index: 20;
   font-size: 2.5rem;
@@ -417,263 +450,253 @@ footer::before {
 }
 /* ********************MEDIA QUERIES******************* */
 
-/* ************* Écrans large ************* */
-@media screen and (max-width: 1650px) {
-  .container h2,
-  label {
-    font-size: 1.4rem;
-  }
-  .mainUp img {
-    left: 11%;
-  }
-  .containerL,
-  .containerR,
-  .container-lutinChef {
-    margin: 15px;
-    z-index: 2;
-  }
-}
-
-@media screen and (max-width: 1180px) {
-  .container h2 {
-    font-size: 1.1rem;
-  }
-  .container p,
-  .container label {
-    font-size: 20px;
-    margin: auto;
-  }
-  .containerR button {
-    width: 90%;
-    margin-top: 5px;
-  }
-}
-
-/* ************* Tablette ************* */
-@media screen and (max-width: 1024px) {
-  .container {
-    width: 95vw;
-    margin: 0 auto;
-    padding: 10px;
-    flex-direction: column;
-  }
+@media (max-width: 1600px) {
   .containerL,
   .containerR,
   .container-lutinChef {
     margin: 10px;
-    width: 90%;
     padding: 15px;
+    height: auto;
+    width: 100%;
   }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    top: 25vh;
+  }
+  .container p,
+  .container h2,
+  .container label {
+    font-size: 1.1rem;
+  }
+}
+
+/* Ajustement pour les écrans de tablette (768px - 1024px) */
+@media (max-width: 1024px) {
+  nav {
+    z-index: 999;
+  }
+  body {
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .lutin-container {
+    display: none;
+  }
+  .lutinListen {
+    position: absolute;
+    left: 60%;
+    top: 14vh;
+    width: 300px;
+  }
+
+  .container {
+    margin-top: 50vh;
+    margin-bottom: 100px;
+    padding: 100px;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .mainUp img {
-    width: 180px;
-    left: 5vh;
+    width: 22vw;
+    position: absolute;
+    top: 15vh;
+    left: 10%;
+    transform: translate(-50%, -50%);
   }
-  h1 {
+
+  .containerL,
+  .containerR,
+  .container-lutinChef {
+    min-width: 80vw;
+    padding: 15px;
+    margin-bottom: 50px;
+  }
+  .containerR {
+    order: 2;
+  }
+  .container-lutinChef {
+    order: 0;
+  }
+  .containerL {
+    order: 1;
+  }
+
+  .lutin-chef {
+    width: 20vw;
+    top: -7vh;
+    left: 50%;
+  }
+
+  #arche {
+    top: -30vh;
     font-size: 2rem;
   }
-  .lutin-chef {
-    width: 25vw;
-  }
-  .nav-right a {
-    font-size: 16px;
-    padding: 10px 30px;
-  }
 }
 
-/* ************* Tablette (entre 768px et 1024px) ************* */
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .lutinListen {
-    display: none;
-  }
-  #arche {
-    font-size: 2.5rem;
-  }
-  .container h2 {
-    font-size: 1.5rem;
-  }
-  .mainUp img {
-    position: fixed;
-    top: 15vh;
-    left: 1vh;
-    width: 200px;
-    z-index: 10;
-  }
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin: 0 auto;
-  }
-  .containerL,
-  .containerR,
-  .container-lutinChef {
-    padding: 5px 30px 30px;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-}
-
-/* ************* Ajustements généraux tablettes ************* */
-@media screen and (min-width: 750px) {
-  /* Ajout d'un media query pour tablettes */
-}
-
-/* ************* Smartphones (max-width: 768px) ************* */
-@media screen and (max-width: 768px) {
+/* Pour les smartphones (moins de 768px) */
+@media (max-width: 768px) {
   body {
-    padding: 10px;
-  }
-  nav {
-    flex-direction: column;
-    align-items: center;
-  }
-  .nav-right a {
-    font-size: 14px;
-    padding: 5px 20px;
-  }
-  .container {
-    flex-direction: column;
-    padding: 10px;
-    width: 100%;
-  }
-  .containerL,
-  .containerR,
-  .container-lutinChef {
-    width: 100%;
-    margin: 10px 0;
-    padding: 10px;
-  }
-  .mainUp img {
-    width: 150px;
-    left: 0;
-    margin: 0 auto;
-  }
-  h1 {
-    font-size: 1.8rem;
-    text-align: center;
-  }
-  .lutin-chef {
-    top: 50%;
-    width: 50vw;
-  }
-  .lutinListen {
-    width: 100%;
-    margin-left: 0;
-  }
-}
-
-/* ************* Smartphones petit (max-width: 768px) ************* */
-@media screen and (max-width: 768px) {
-  body {
-    padding-top: 40vh;
-    bottom: 100vh;
-    overflow: auto;
     height: auto;
-    background-image: url(./assets/cadeaux.jpeg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    overflow-y: auto;
   }
-  #background-video-container {
-    display: none;
-  }
+
+  .lutin-container,
   .lutinListen {
     display: none;
   }
+
   nav {
     flex-direction: column;
-    align-items: center;
-  }
-  .nav-right a {
-    font-size: 14px;
-    padding: 5px 20px;
-  }
-  h1 {
-    font-size: 1.8rem;
-    text-align: center;
-  }
-  .mainUp img {
-    width: 150px;
-    margin: 0 auto;
-    position: relative;
-    left: 0;
-  }
-  .lutin-chef {
-    top: 50%;
-    width: 50vw;
-  }
-  .lutinListen {
-    width: 100%;
-    margin-left: 0;
-  }
-  .container {
-    flex-direction: column;
+    position: fixed;
     align-items: center;
     padding: 10px;
-    width: 100%;
   }
+
+  .nav-right a {
+    font-size: 18px;
+    padding: 5px 20px;
+  }
+
+  .mainUp {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    z-index: 3;
+  }
+  #logwhite {
+    width: 12%;
+    top: 1vh;
+    left: 80%;
+  }
+
+  .container {
+    margin-top: 150px;
+    padding-bottom: 100px;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+  }
+
   .containerL,
   .containerR,
   .container-lutinChef {
     width: 100%;
     margin: 10px 0;
     padding: 10px;
+    height: auto; /* Hauteur dynamique */
   }
-  button {
-    width: 100%;
-    margin: 10px 0;
+
+  .lutin-chef {
+    z-index: 999;
+    width: 50vw;
+    top: -11vh;
   }
-  p,
-  label {
-    font-size: 14px;
+
+  #arche {
+    font-size: 2.5rem; /* Proportionnel à LutinChef en mobile */
+    text-align: center;
+    top: -110%;
   }
-  .lutin-bouton,
-  .lutinHead {
-    width: 25vw;
+
+  footer {
+    position: fixed;
+    text-align: center;
+    flex-direction: column;
   }
 }
 
-/* ************* Petit smartphones (max-width: 480px) ************* */
-@media screen and (max-width: 480px) {
+/* Pour les petits smartphones (moins de 480px) */
+@media (max-width: 480px) {
+  .containerL,
+  .containerR,
+  .container-lutinChef {
+    padding: 8px;
+    height: auto;
+  }
+
+  #logwhite {
+    left: 85vw;
+    top: 5vh;
+  }
+
+  #arche {
+    font-size: 2.5rem; /* Proportionnel à LutinChef en mobile */
+    text-align: center;
+    top: -120%;
+  }
+
+  .lutin-container {
+    display: none;
+  }
+
+  .mainUp {
+    top: 11%;
+    left: 53%;
+  }
+
   h1 {
     font-size: 1.5rem;
   }
+
   p,
   label {
     font-size: 12px;
   }
-  .mainUp img {
-    width: 120px;
-    left: 0;
-    margin: 0 auto;
-  }
-  .container {
-    padding: 5px;
-  }
-  .containerL,
-  .containerR,
-  .container-lutinChef {
-    width: 100%;
-    margin: 5px 0;
-    padding: 5px;
-  }
+
   .lutin-chef {
-    width: 60vw;
+    width: 200px;
+    top: -8vh;
   }
-  .lutinListen {
-    width: 90vw;
-    margin-left: 0;
-  }
+
   button {
     font-size: 14px;
     width: 100%;
   }
+
   .nav-right a {
     font-size: 12px;
   }
-  .footer-center a {
+
+  footer {
+    display: flex;
+    justify-content: center; /* Centre tout le contenu horizontalement */
+    align-items: center;
+    flex-direction: column; /* Organise les éléments en colonne */
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(to left, #ffffff, #bb2649);
+    color: white;
+    width: 100%;
+    position: fixed; /* Fixe le footer en bas de l'écran */
+    bottom: 0;
+    z-index: 1000; /* Assure que le footer est au-dessus d'autres éléments */
+  }
+
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    margin: 5px 0; /* Espacement uniforme pour chaque section */
+  }
+
+  .footer-center {
+    display: flex;
+    gap: 15px; /* Espacement entre les icônes */
+  }
+
+  .footer-center a,
+  .footer-right a {
+    color: white;
     font-size: 20px;
+    text-decoration: none;
+  }
+
+  .footer-center a:hover,
+  .footer-right a:hover {
+    color: #ffcccb; /* Couleur de survol pour une apparence interactive */
   }
 }

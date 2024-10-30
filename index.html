@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Féérie des lutins: message</title>
-    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="stylesheet" href="test.css" />
     <link
       rel="shortcut icon"
       href="./assets/La_Feerie_des_Lutins__Publication_Facebook_-removebg-preview.webp"
@@ -16,14 +16,23 @@
     />
   </head>
   <body id="bodystory">
+    <div id="background-video-container">
+      <video id="background-video" autoplay loop muted playsinline>
+        <source src="./assets/19931-306108622_tiny.mp4" type="video/mp4" />
+      </video>
+    </div>
     <nav>
       <div class="nav-left">
         <img
           src="./assets/La_Feerie_des_Lutins__Publication_Facebook_-removebg-preview.webp"
           alt="Logo"
         />
+
         <h4>La féérie des lutins</h4>
       </div>
+
+      <img id="logwhite" src="./assets/mycandyLogoWhite.jpeg" alt="logo" />
+
       <div class="nav-right">
         <a
           href="https://www.mycandyfeerie.com/collections/toute-la-boutique-de-noel"
@@ -32,39 +41,28 @@
         >
       </div>
     </nav>
-    <h1 id="arche">
-      <span>L</span><span>a</span> <span>f</span><span>é</span><span>é</span
-      ><span>r</span><span>i</span><span>e</span> <span>d</span><span>e</span
-      ><span>s</span> <span>l</span><span>u</span><span>t</span><span>i</span
-      ><span>n</span><span>s</span>
-    </h1>
-    <img src="./assets/lutinChef.png" alt="Lutin assis" class="lutin-chef" />
 
-    <div id="background-video-container">
-      <video id="background-video" autoplay loop muted playsinline>
-        <source src="./assets/19931-306108622_tiny.mp4" type="video/mp4" />
-      </video>
-    </div>
     <div class="mainUp">
       <img
         src="./assets/La_Feerie_des_Lutins__Publication_Facebook_-removebg-preview.webp"
         alt=""
       />
     </div>
+
     <img src="./assets/lutinListen.png" alt="LutinListen" class="lutinListen" />
 
     <div class="lutin-container"></div>
+
     <div class="container">
       <div class="containerL">
         <h2>COUCOU !</h2>
         <p>
-          Bienvenue dans l'atelier des lutins ! Ici, tu peux écouter leur
-          message magique, et avec un peu de chance, le
-          <strong>Père Noël</strong> lui-même te parlera ! Garde bien l'oreille
+          Bienvenue dans l'atelier des lutins ! Écoute bien… le
+          <strong>Père Noël </strong> pourrait te parler ! Garde bien l'oreille
           ouverte !
         </p>
         <p class="contp">
-          As tu compté le nombre de lutin sur l'écran? <br />réponse:
+          Les lutins 13 islandais sont parmi nous... Viens les découvrir!
         </p>
 
         <a href="lutindenoel.html">
@@ -72,6 +70,17 @@
         </a>
       </div>
       <div class="container-lutinChef">
+        <h1 id="arche">
+          <span>L</span><span>a</span> <span>f</span><span>é</span><span>é</span
+          ><span>r</span><span>i</span><span>e</span> <span>d</span
+          ><span>e</span><span>s</span> <span>l</span><span>u</span
+          ><span>t</span><span>i</span><span>n</span><span>s</span>
+        </h1>
+        <img
+          src="./assets/lutinChef.png"
+          alt="Lutin assis"
+          class="lutin-chef"
+        />
         <h2>TON MESSAGE PERSONNALISÉ !</h2>
         <label>Écris ton prénom pour écouter ton message.</label>
         <input
@@ -133,6 +142,6 @@
     <!-- CircleType via jsDelivr -->
     <script src="https://cdn.jsdelivr.net/npm/circletype@2.3.0/dist/circletype.min.js"></script>
     <!-- Ton script principal -->
-    <script src="./scripts/script.js"></script>
+    <script src="test.js"></script>
   </body>
 </html>

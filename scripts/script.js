@@ -1,131 +1,118 @@
 const synth = window.speechSynthesis;
 let voices = [];
 
-// Fonction pour charger et sélectionner les voix féminines françaises
-function chargerVoix() {
-  voices = synth.getVoices();
+// Module de synthèse vocale
+const VoiceModule = {
+  loadVoices() {
+    voices = synth.getVoices();
+    const frenchFemaleVoices = voices.filter((voice) => {
+      return (
+        voice.lang === "fr-FR" &&
+        (voice.name.includes("Google français") ||
+          voice.name.includes("Microsoft Hortense") ||
+          voice.name.includes("Amelie") ||
+          voice.name.includes("Sophie"))
+      );
+    });
 
-  const voixFemininesFrancaises = voices.filter((voice) => {
-    return (
-      voice.lang === "fr-FR" &&
-      (voice.name.includes("Google français") ||
-        voice.name.includes("Microsoft Hortense") ||
-        voice.name.includes("Amelie") ||
-        voice.name.includes("Sophie"))
-    );
-  });
+    return frenchFemaleVoices.length > 0 ? frenchFemaleVoices[0] : voices[0];
+  },
 
-  return voixFemininesFrancaises.length > 0
-    ? voixFemininesFrancaises[0]
-    : voices[0];
-}
+  playMessage(prenom = "ami") {
+    const messages = [
+      `Coucou ${prenom} ! J'ai un petit message du Père Noël ! Tu as été très gentil durant cette année, alors bravo, tu es sur la bonne voie pour recevoir ton joli cadeau ! On compte sur toi ! Tous les lutins te font d'énormes bisous !`,
+      `Bonjour ${prenom} ! Le Père Noël m'a demandé de te dire qu'il est très fier de toi cette année. Continue ainsi et un super cadeau t'attend ! Gros bisous des lutins !`,
+      `Coucou ! On dirait que Noël approche ? ${prenom}, tu as vraiment bien travaillé cette année, et ton cadeau est en route. Bravo et joyeux Noël !`,
+      `Salut ${prenom} ! Le Père Noël m'a dit que tu as été exemplaire cette année ! Un beau cadeau est en préparation pour toi. Joyeux Noël et à très bientôt !`,
+      `Coucou ${prenom} ! Les lutins m'ont dit que tu as été adorable toute l'année. Un cadeau spécial est prêt pour toi. Joyeux Noël de la part du Père Noël et des lutins !`,
+    ];
 
-// Fonction pour jouer un message aléatoire
-function jouerMessage() {
-  const prenom = document.getElementById("prenom").value || "ami";
+    const message = messages[Math.floor(Math.random() * messages.length)];
+    const utterance = new SpeechSynthesisUtterance(message);
+    utterance.lang = "fr-FR";
+    utterance.voice = this.loadVoices();
 
-  // Liste des messages
-  const messages = [
-    `Coucou ${prenom} ! J'ai un petit message du Père Noël ! Tu as été très gentil durant cette année, alors bravo, tu es sur la bonne voie pour recevoir ton joli cadeau ! On compte sur toi ! Tous les lutins te font d'énormes bisous !`,
-    `Bonjour ${prenom} ! Le Père Noël m'a demandé de te dire qu'il est très fier de toi cette année. Continue ainsi et un super cadeau t'attend ! Gros bisous des lutins !`,
-    `Coucou ! On dirait que Noël approche ? ${prenom}, tu as vraiment bien travaillé cette année, et ton cadeau est en route. Bravo et joyeux Noël !`,
-    `Salut ${prenom} ! Le Père Noël m'a dit que tu as été exemplaire cette année ! Un beau cadeau est en préparation pour toi. Joyeux Noël et à très bientôt !`,
-    `Coucou ${prenom} ! Les lutins m'ont dit que tu as été adorable toute l'année. Un cadeau spécial est prêt pour toi. Joyeux Noël de la part du Père Noël et des lutins !`,
-  ];
+    synth.speak(utterance);
+  },
+};
+// ________________________________________________________L U T I N S__________________________________________
+// Module de gestion des lutins
+const LutinModule = {
+  adjustLutins() {
+    const lutinContainer = document.querySelector(".lutin-container");
+    lutinContainer.innerHTML = "";
 
-  // Sélectionner un message aléatoire
-  const message = messages[Math.floor(Math.random() * messages.length)];
+    const windowWidth = window.innerWidth;
+    let numberOfLutins =
+      windowWidth > 1200
+        ? 9
+        : windowWidth > 800
+        ? 7
+        : windowWidth > 600
+        ? 5
+        : 3;
 
-  const utterance = new SpeechSynthesisUtterance(message);
-  utterance.lang = "fr-FR";
-
-  const selectedVoice = chargerVoix();
-  if (selectedVoice) {
-    utterance.voice = selectedVoice;
-  } else {
-    console.warn("Aucune voix féminine française trouvée.");
-  }
-
-  synth.speak(utterance);
-}
-
-// Fonction pour ajuster dynamiquement le nombre de lutins en fonction de la taille de la fenêtre
-function ajusterNombreLutins() {
-  const lutinContainer = document.querySelector(".lutin-container");
-
-  // Supprimer les lutins actuels
-  lutinContainer.innerHTML = "";
-
-  // Calculer le nombre de lutins en fonction de la largeur de la fenêtre
-  const windowWidth = window.innerWidth;
-  let nombreLutins;
-
-  if (windowWidth > 1200) {
-    nombreLutins = 9; // Grand écran
-  } else if (windowWidth > 800) {
-    nombreLutins = 7; // Écran moyen
-  } else if (windowWidth > 600) {
-    nombreLutins = 5; // Petite tablette
-  } else {
-    nombreLutins = 3; // Smartphone
-  }
-
-  // Générer les lutins avec des classes uniques
-  for (let i = 1; i <= nombreLutins; i++) {
-    const lutin = document.createElement("img");
-    lutin.src = "./assets/lutinStar.png";
-    lutin.alt = `Lutin animé ${i}`;
-    lutin.classList.add("image-animée", `delay${i}`, `lutin-${i}`); // Ajout d'une classe unique
-    lutinContainer.appendChild(lutin);
-  }
-
-  // Appeler la fonction pour cacher certains lutins en fonction de leur numéro
-  cacherLutinsParNumero();
-}
-
-// Fonction pour rendre invisibles certains lutins (ex : lutins 1, 3, 6, et 8) tout en conservant leur position
-function cacherLutinsParNumero() {
-  // Cacher les lutins 1, 3, 6, et 8
-  const lutinsAEnlever = [1, 9]; // Liste des lutins à cacher
-
-  lutinsAEnlever.forEach((num) => {
-    const lutin = document.querySelector(`.lutin-${num}`);
-    if (lutin) {
-      lutin.style.visibility = "hidden"; // Rend le lutin invisible mais conserve son espace
+    for (let i = 1; i <= numberOfLutins; i++) {
+      const lutin = document.createElement("img");
+      lutin.src = "./assets/lutinStar.png";
+      lutin.alt = `Lutin animé ${i}`;
+      lutin.classList.add("image-animée", `delay${i}`, `lutin-${i}`);
+      lutinContainer.appendChild(lutin);
     }
-  });
-}
 
-// Appliquer CircleType pour courber le texte "La féérie des lutins"
-function courberTexte() {
+    this.hideSpecificLutins([2, 6, 9]);
+  },
+
+  hideSpecificLutins(lutinsToHide) {
+    lutinsToHide.forEach((num) => {
+      const lutin = document.querySelector(`.lutin-${num}`);
+      if (lutin) {
+        lutin.style.visibility = "hidden";
+      }
+    });
+  },
+};
+
+// Fonction pour courber le texte
+function applyTextCurve() {
   const element = document.getElementById("arche");
-  new CircleType(element).radius(180); // Appliquer un rayon de 300px à l'arche
+  if (element) new CircleType(element).radius(150);
 }
 
-// Gérer la touche "Entrée" et le bouton "Écouter"
-function ajouterEventListeners() {
+// Gérer les interactions utilisateur
+function setupEventListeners() {
   const prenomInput = document.getElementById("prenom");
   const ecouterBtn = document.getElementById("ecouterBtn");
 
-  prenomInput.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      jouerMessage();
-    }
-  });
+  if (prenomInput) {
+    prenomInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        VoiceModule.playMessage(prenomInput.value);
+      }
+    });
+  }
 
-  ecouterBtn.addEventListener("click", jouerMessage);
+  if (ecouterBtn) {
+    ecouterBtn.addEventListener("click", () => {
+      VoiceModule.playMessage(prenomInput.value);
+    });
+  }
 }
 
-// Charger les voix lorsque la page est prête
-window.onload = function () {
+// Initialisation de la page et des modules
+function init() {
   if (synth.onvoiceschanged !== undefined) {
-    synth.onvoiceschanged = chargerVoix;
+    synth.onvoiceschanged = VoiceModule.loadVoices;
   }
-  chargerVoix();
-  ajouterEventListeners();
-  ajusterNombreLutins(); // Générer les lutins en fonction de la taille de la fenêtre au chargement
-  courberTexte(); // Courber le texte une fois la page chargée
+  VoiceModule.loadVoices();
+  setupEventListeners();
+  LutinModule.adjustLutins();
+  applyTextCurve();
 
-  // Écoute les événements de redimensionnement de la fenêtre pour ajuster les lutins
-  window.addEventListener("resize", ajusterNombreLutins);
-};
+  window.addEventListener("resize", () => {
+    LutinModule.adjustLutins();
+  });
+}
+
+// Lancer l'initialisation au chargement de la page
+window.onload = init;

@@ -3,38 +3,145 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jeu des Bulles</title>
-    <link rel="stylesheet" href="./styles/jeu-bulles.css" />
+    <title>Féérie des lutins: message</title>
+    <link rel="stylesheet" href="test.css" />
+    <link
+      rel="shortcut icon"
+      href="./assets/La_Feerie_des_Lutins__Publication_Facebook_-removebg-preview.webp"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
-  <body class="page-deux">
+  <body id="bodystory">
+    <div id="background-video-container">
+      <video id="background-video" autoplay loop muted playsinline>
+        <source src="./assets/19931-306108622_tiny.mp4" type="video/mp4" />
+      </video>
+    </div>
     <nav>
       <div class="nav-left">
         <img
           src="./assets/La_Feerie_des_Lutins__Publication_Facebook_-removebg-preview.webp"
           alt="Logo"
         />
+
         <h4>La féérie des lutins</h4>
       </div>
+
+      <img id="logwhite" src="./assets/mycandyLogoWhite.jpeg" alt="logo" />
+
       <div class="nav-right">
-        <a href="./index.html" target="_blank">Retour à la féérie des lutins</a>
+        <a
+          href="https://www.mycandyfeerie.com/collections/toute-la-boutique-de-noel"
+          target="_blank"
+          >Retour à la boutique</a
+        >
       </div>
     </nav>
 
-    <!-- Écran d'Accueil -->
-    <div id="intro-screen" class="intro-screen">
-      <h2>Bienvenue dans le Jeu des Bulles !</h2>
-      <p>Êtes-vous prêt à éclater un maximum de bulles ?</p>
-      <button id="start-button">C'est parti !</button>
+    <div class="mainUp">
+      <img
+        src="./assets/La_Feerie_des_Lutins__Publication_Facebook_-removebg-preview.webp"
+        alt=""
+      />
     </div>
-    <img src="./assets/lutinGun.png" alt="Lutin Arms" class="overlay-image" />
 
-    <!-- Compteur de Départ -->
-    <div id="countdown" class="countdown"></div>
+    <img src="./assets/lutinListen.png" alt="LutinListen" class="lutinListen" />
 
-    <!-- Affichage Score et Barre de Progression -->
-    <h3 id="score-display">0</h3>
-    <div id="progress-bar" class="progress-bar"></div>
+    <div class="lutin-container"></div>
 
-    <script src="./scripts/jeu-bulles.js"></script>
+    <div class="container">
+      <div class="containerL">
+        <h2>COUCOU !</h2>
+        <p>
+          Bienvenue dans l'atelier des lutins ! Écoute bien… le
+          <strong>Père Noël </strong> pourrait te parler ! Garde bien l'oreille
+          ouverte !
+        </p>
+        <p class="contp">
+          Les lutins 13 islandais sont parmi nous... Viens les découvrir!
+        </p>
+
+        <a href="lutindenoel.html">
+          <button id="lutinNb">Découvrir</button>
+        </a>
+      </div>
+      <div class="container-lutinChef">
+        <h1 id="arche">
+          <span>L</span><span>a</span> <span>f</span><span>é</span><span>é</span
+          ><span>r</span><span>i</span><span>e</span> <span>d</span
+          ><span>e</span><span>s</span> <span>l</span><span>u</span
+          ><span>t</span><span>i</span><span>n</span><span>s</span>
+        </h1>
+        <img
+          src="./assets/lutinChef.png"
+          alt="Lutin assis"
+          class="lutin-chef"
+        />
+        <h2>TON MESSAGE PERSONNALISÉ !</h2>
+        <label>Écris ton prénom pour écouter ton message.</label>
+        <input
+          type="text"
+          id="prenom"
+          placeholder="Votre prénom ici"
+          onkeydown="verifierEntree(event)"
+        />
+        <button id="ecouterBtn">Écouter</button>
+        <img
+          src="./assets/lutinBouton.png"
+          alt="Lutin bouton"
+          class="lutin-bouton"
+        />
+        <img src="./assets/lutinHead.png" alt="LutinHead" class="lutinHead" />
+      </div>
+
+      <div class="containerR">
+        <h2>JOUE AVEC NOUS !</h2>
+        <p>
+          Remplis le formulaire et éclate le plus de bulles en 1 minute pour
+          gagner un <strong>cadeau spéciale</strong> de la boutique
+          <span id="clignote">Mycandyfeerie® </span>
+        </p>
+
+        <p class="contp">
+          Joue autant de fois que tu veux jusqu'au 15 décembre
+        </p>
+        <button class="btn2" onclick="window.location.href='jeu-bulles.html'">
+          C'est parti !
+        </button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-left">© 2024, Mycandyfeerie®</div>
+      <div class="footer-center">
+        <a
+          href="https://www.facebook.com/people/La-F%C3%A9erie-des-Lutins/61565446238261/?_rdr"
+          target="_blank"
+        >
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://www.instagram.com/feeriecandy/" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@mycandyfeerie" target="_blank">
+          <i class="fab fa-tiktok"></i>
+        </a>
+      </div>
+      <div class="footer-right">
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+      </div>
+    </footer>
+
+    <!-- jQuery en premier -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- CircleType via jsDelivr -->
+    <script src="https://cdn.jsdelivr.net/npm/circletype@2.3.0/dist/circletype.min.js"></script>
+    <!-- Ton script principal -->
+    <script src="test.js"></script>
   </body>
 </html>

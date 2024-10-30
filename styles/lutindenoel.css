@@ -69,20 +69,20 @@ nav::before {
   width: 80%;
 }
 .mainUp img {
-  top: 5vh;
+  top: 1vh;
   width: 20%;
   position: relative;
-  left: 8vh;
+  left: -2vw;
 }
 .mainUp2 img {
   top: 1vh;
   width: 25%;
   position: relative;
-  left: 5vh;
+  left: -2vw;
   border-radius: 50%;
 }
 .mainUp img,
-.mainUp2 {
+.mainUp2 img {
   border-radius: 50%;
   animation: rotation 10s linear infinite;
 }
@@ -162,7 +162,8 @@ nav::before {
 
 #secret {
   font-style: italic;
-  color: #301fc4;
+  color: #ffffff;
+  animation: clignoter-shadow 0.8s infinite alternate-reverse;
 }
 
 .marque {
@@ -176,10 +177,10 @@ nav::before {
 
 @keyframes clignoter-shadow {
   0% {
-    text-shadow: 2px 2px 10px rgb(0, 4, 255), -2px -2px 10px rgb(174, 187, 255);
+    text-shadow: 2px 2px 10px rgb(0, 4, 255), -2px -2px 5px rgb(174, 187, 255);
   }
   100% {
-    text-shadow: 2px 2px 20px rgb(255, 255, 255), -2px -2px 20px rgb(4, 12, 255);
+    text-shadow: 2px 2px 20px rgb(255, 255, 255), -2px -2px 5px rgb(4, 12, 255);
   }
 }
 
@@ -199,7 +200,7 @@ h3 {
 
 #nblut {
   color: rgb(255, 255, 86);
-  font-size: 8rem;
+  font-size: 2rem;
   font-weight: bold;
 }
 
@@ -339,20 +340,20 @@ footer::before {
   }
 
   #nblut {
-    font-size: 6rem;
+    font-size: 4rem;
   }
   .mainUp img {
-    width: 25%;
+    width: 20%;
     position: absolute;
-    left: 10vw;
-    top: 8vh;
+    left: 1vw;
+    top: 30vh;
   }
 
   .mainUp2 img {
     width: 25%;
     position: absolute;
     right: 5vw;
-    top: 15vh;
+    top: 43vh;
   }
 }
 
@@ -377,11 +378,7 @@ footer::before {
   }
 
   #nblut {
-    font-size: 4rem;
-  }
-
-  h1 {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   nav {
@@ -405,28 +402,26 @@ footer::before {
     width: 25%;
     position: absolute;
     left: 10vw;
-    top: 8vh; /* Placer plus bas */
+    top: 8vh;
   }
 
   .mainUp2 img {
     width: 25%;
     position: absolute;
-    right: 5vw; /* Écarter sur le côté droit */
-    top: 15vh; /* Placer plus bas */
+    top: 30vh;
   }
 }
 
 @media (max-width: 480px) {
   body {
-    padding: 5%;
+    margin-top: 100px;
   }
-
   h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   #nblut {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   p,
@@ -476,13 +471,13 @@ footer::before {
     width: 30%;
     position: absolute;
     left: 5vw; /* Écarter davantage */
-    top: 20vh; /* Placer plus bas */
+    top: 28vh; /* Placer plus bas */
   }
 
   .mainUp2 img {
     width: 30%;
     position: absolute;
-    right: 5vw; /* Écarter davantage */
-    top: 20vh; /* Placer plus bas */
+    left: 50vw; /* Écarter davantage */
+    top: 28vh; /* Placer plus bas */
   }
 }

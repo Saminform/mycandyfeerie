@@ -1,80 +1,120 @@
-const introScreen = document.getElementById("intro-screen");
-const startButton = document.getElementById("start-button");
-const countdown = document.getElementById("countdown");
-const scoreDisplay = document.getElementById("score-display");
-const progressBar = document.getElementById("progress-bar");
+const synth = window.speechSynthesis;
+let voices = [];
 
-let counter = 0;
-let gameDuration = 60; // Durée du jeu en secondes
-let interval, countdownInterval;
+// Module de synthèse vocale
+const VoiceModule = {
+  loadVoices() {
+    voices = synth.getVoices();
+    const frenchFemaleVoices = voices.filter((voice) => {
+      return (
+        voice.lang === "fr-FR" &&
+        (voice.name.includes("Google français") ||
+          voice.name.includes("Microsoft Hortense") ||
+          voice.name.includes("Amelie") ||
+          voice.name.includes("Sophie"))
+      );
+    });
+    return frenchFemaleVoices.length > 0 ? frenchFemaleVoices[0] : voices[0];
+  },
 
-const bubbleMaker = () => {
-  const bubble = document.createElement("span");
-  bubble.classList.add("bubble");
-  document.body.appendChild(bubble);
+  playMessage(prenom = "ami") {
+    const messages = [
+      `Coucou ${prenom} ! J'ai un petit message du Père Noël ! Tu as été très gentil durant cette année, alors bravo, tu es sur la bonne voie pour recevoir ton joli cadeau ! On compte sur toi ! Tous les lutins te font d'énormes bisous !`,
+      `Bonjour ${prenom} ! Le Père Noël m'a demandé de te dire qu'il est très fier de toi cette année. Continue ainsi et un super cadeau t'attend ! Gros bisous des lutins !`,
+      `Coucou ! On dirait que Noël approche ? ${prenom}, tu as vraiment bien travaillé cette année, et ton cadeau est en route. Bravo et joyeux Noël !`,
+      `Salut ${prenom} ! Le Père Noël m'a dit que tu as été exemplaire cette année ! Un beau cadeau est en préparation pour toi. Joyeux Noël et à très bientôt !`,
+      `Coucou ${prenom} ! Les lutins m'ont dit que tu as été adorable toute l'année. Un cadeau spécial est prêt pour toi. Joyeux Noël de la part du Père Noël et des lutins !`,
+    ];
 
-  const size = Math.random() * 200 + 100 + "px";
-  bubble.style.height = size;
-  bubble.style.width = size;
+    const message = messages[Math.floor(Math.random() * messages.length)];
+    const utterance = new SpeechSynthesisUtterance(message);
+    utterance.lang = "fr-FR";
+    utterance.voice = this.loadVoices();
 
-  bubble.style.top = Math.random() * 100 + 50 + "%";
-  bubble.style.left = Math.random() * 100 + "%";
+    console.log("Message généré :", message); // Vérifie le contenu du message
+    console.log("Voix utilisée :", utterance.voice); // Vérifie la voix sélectionnée
 
-  const plusMinus = Math.random() > 0.5 ? 1 : -1;
-  bubble.style.setProperty("--left", Math.random() * 100 * plusMinus + "%");
+    synth.speak(utterance);
+  },
+};
 
-  bubble.addEventListener("click", () => {
-    counter++;
-    scoreDisplay.textContent = counter;
-    bubble.remove();
+// Module de gestion des lutins
+const LutinModule = {
+  adjustLutins() {
+    const lutinContainer = document.querySelector(".lutin-container");
+    lutinContainer.innerHTML = "";
+
+    const windowWidth = window.innerWidth;
+    let numberOfLutins =
+      windowWidth > 1200
+        ? 9
+        : windowWidth > 800
+        ? 7
+        : windowWidth > 600
+        ? 5
+        : 3;
+
+    for (let i = 1; i <= numberOfLutins; i++) {
+      const lutin = document.createElement("img");
+      lutin.src = "./assets/lutinStar.png";
+      lutin.alt = `Lutin animé ${i}`;
+      lutin.classList.add("image-animée", `delay${i}`, `lutin-${i}`);
+      lutinContainer.appendChild(lutin);
+    }
+
+    this.hideSpecificLutins([2, 6, 9]);
+  },
+
+  hideSpecificLutins(lutinsToHide) {
+    lutinsToHide.forEach((num) => {
+      const lutin = document.querySelector(`.lutin-${num}`);
+      if (lutin) {
+        lutin.style.visibility = "hidden";
+      }
+    });
+  },
+};
+
+// Fonction pour courber le texte
+function applyTextCurve() {
+  const element = document.getElementById("arche");
+  if (element) new CircleType(element).radius(170);
+}
+
+// Gérer les interactions utilisateur
+function setupEventListeners() {
+  const prenomInput = document.getElementById("prenom");
+  const ecouterBtn = document.getElementById("ecouterBtn");
+
+  if (prenomInput) {
+    prenomInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        VoiceModule.playMessage(prenomInput.value);
+      }
+    });
+  }
+
+  if (ecouterBtn) {
+    ecouterBtn.addEventListener("click", () => {
+      VoiceModule.playMessage(prenomInput.value);
+    });
+  }
+}
+
+// Initialisation de la page et des modules
+function init() {
+  if (synth.onvoiceschanged !== undefined) {
+    synth.onvoiceschanged = () => VoiceModule.loadVoices();
+  }
+  VoiceModule.loadVoices();
+  setupEventListeners();
+  LutinModule.adjustLutins();
+  applyTextCurve();
+
+  window.addEventListener("resize", () => {
+    LutinModule.adjustLutins();
   });
+}
 
-  setTimeout(() => {
-    bubble.remove();
-  }, 8000);
-};
-
-const startGame = () => {
-  counter = 0;
-  scoreDisplay.textContent = counter;
-  progressBar.style.width = "100%";
-  countdown.style.display = "none";
-
-  interval = setInterval(bubbleMaker, 600);
-
-  let timeRemaining = gameDuration;
-  const progressInterval = setInterval(() => {
-    timeRemaining--;
-    progressBar.style.width = (timeRemaining / gameDuration) * 100 + "%";
-
-    if (timeRemaining <= 0) {
-      clearInterval(interval);
-      clearInterval(progressInterval);
-      alert(`Temps écoulé ! Votre score final est : ${counter}`);
-      introScreen.style.display = "block";
-      progressBar.style.width = "0";
-    }
-  }, 1000);
-};
-
-const startCountdown = () => {
-  let countdownValue = 3;
-  countdown.style.display = "block";
-  countdown.textContent = countdownValue;
-
-  countdownInterval = setInterval(() => {
-    countdownValue--;
-    countdown.textContent = countdownValue;
-
-    if (countdownValue <= 0) {
-      clearInterval(countdownInterval);
-      startGame();
-    }
-  }, 1000);
-};
-
-// Gestion de l'événement de clic pour le démarrage
-startButton.addEventListener("click", () => {
-  introScreen.style.display = "none";
-  startCountdown();
-});
+// Lancer l'initialisation au chargement de la page
+window.onload = init;

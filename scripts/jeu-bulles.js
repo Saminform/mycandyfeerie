@@ -1,15 +1,19 @@
 const introScreen = document.getElementById("intro-screen");
-const userForm = document.getElementById("user-form"); // Assure-toi que le formulaire a l'id "user-form"
+const userForm = document.getElementById("user-form");
 const startButton = document.getElementById("start-button");
 const countdown = document.getElementById("countdown");
 const scoreDisplay = document.getElementById("score-display");
 const progressBar = document.getElementById("progress-bar");
+const scoreboardBody = document.getElementById("scoreboard-body");
+const replayButton = document.getElementById("replayButton");
+const quitButton = document.getElementById("quit-button");
+const finalScoreDisplay = document.getElementById("final-score");
 
 let counter = 0;
-let gameDuration = 60; // Durée du jeu en secondes
+let gameDuration = 60;
 let interval, countdownInterval;
 let isUserRegistered = localStorage.getItem("isUserRegistered") === "true";
-
+let scores = [];
 const bubbleMaker = () => {
   const bubble = document.createElement("span");
   bubble.classList.add("bubble");
@@ -18,10 +22,8 @@ const bubbleMaker = () => {
   const size = Math.random() * 200 + 100 + "px";
   bubble.style.height = size;
   bubble.style.width = size;
-
   bubble.style.top = Math.random() * 100 + 50 + "%";
   bubble.style.left = Math.random() * 100 + "%";
-
   const plusMinus = Math.random() > 0.5 ? 1 : -1;
   bubble.style.setProperty("--left", Math.random() * 100 * plusMinus + "%");
 
@@ -31,19 +33,15 @@ const bubbleMaker = () => {
     bubble.remove();
   });
 
-  setTimeout(() => {
-    bubble.remove();
-  }, 8000);
+  setTimeout(() => bubble.remove(), 8000);
 };
 
 const startGame = () => {
-  clearInterval(interval); // Efface tout intervalle précédent de bulles
-  clearInterval(countdownInterval); // Efface tout intervalle de compte à rebours précédent
+  clearInterval(interval);
+  clearInterval(countdownInterval);
 
   counter = 0;
   scoreDisplay.textContent = counter;
-
-  // Réinitialise la largeur de la barre de progression
   progressBar.style.width = "100%";
   countdown.style.display = "none";
 
@@ -57,10 +55,18 @@ const startGame = () => {
     if (timeRemaining <= 0) {
       clearInterval(interval);
       clearInterval(progressInterval);
-      alert(`Temps écoulé ! Votre score final est : ${counter}`);
+
+      finalScoreDisplay.style.display = "block";
+      finalScoreDisplay.textContent = `Votre score : ${counter}`;
+
+      // Récupérer les valeurs de nom et prénom du Local Storage si elles existent
+      const firstName = localStorage.getItem("firstName");
+      const lastName = localStorage.getItem("lastName");
+      addScoreToBoard(firstName, lastName, counter);
+
       introScreen.style.display = "block";
       replayButton.style.display = "block";
-      progressBar.style.width = "0"; // Réinitialise la barre après le jeu
+      progressBar.style.width = "0";
     }
   }, 1000);
 };
@@ -81,45 +87,65 @@ const startCountdown = () => {
   }, 1000);
 };
 
-const quitButton = document.getElementById("quit-button"); // Bouton Quitter
-
-// Gestion de la soumission du formulaire pour la première inscription
 userForm.addEventListener("submit", (e) => {
-  e.preventDefault(); // Empêche la soumission classique du formulaire
-  isUserRegistered = true; // Marque l'utilisateur comme inscrit
-  localStorage.setItem("isUserRegistered", "true"); // Enregistre dans le Local Storage
+  e.preventDefault();
+  isUserRegistered = true;
+  localStorage.setItem("isUserRegistered", "true");
+
+  // Stocker les valeurs du formulaire dans le Local Storage
+  const firstName = document.getElementById("first-name").value;
+  const lastName = document.getElementById("last-name").value;
+  localStorage.setItem("firstName", firstName);
+  localStorage.setItem("lastName", lastName);
+
   introScreen.style.display = "none";
-  quitButton.style.display = "block"; // Affiche le bouton Quitter pendant la partie
-  startCountdown(); // Lance le compte à rebours
+  quitButton.style.display = "block";
+  startCountdown();
 });
 
-// Gestion de la relance directe du jeu sans formulaire
 replayButton.addEventListener("click", () => {
   introScreen.style.display = "none";
-  quitButton.style.display = "block"; // Affiche le bouton Quitter pendant la partie
-  startCountdown(); // Lance le compte à rebours
+  quitButton.style.display = "block";
+  startCountdown();
 });
 
-// Fonction pour quitter la partie et revenir à l'écran d'accueil
-const quitGame = () => {
-  clearInterval(interval); // Arrête la génération de bulles
-  clearInterval(countdownInterval); // Arrête le compte à rebours
-  quitButton.style.display = "none"; // Cache le bouton Quitter
-  introScreen.style.display = "block"; // Retourne à l'écran d'accueil
-  replayButton.style.display = "block"; // Affiche le bouton Rejouer si déjà inscrit
-};
+quitButton.addEventListener("click", () => {
+  clearInterval(interval);
+  clearInterval(countdownInterval);
+  quitButton.style.display = "none";
+  introScreen.style.display = "block";
+  replayButton.style.display = "block";
+});
 
-// Gestion de l'événement de clic pour le bouton Quitter
-quitButton.addEventListener("click", quitGame);
-
-// Vérifie l'état d'inscription au chargement de la page
 window.addEventListener("DOMContentLoaded", () => {
   if (isUserRegistered) {
-    userForm.style.display = "none"; // Cache le formulaire si l'utilisateur est déjà inscrit
-    replayButton.style.display = "block"; // Affiche le bouton Rejouer
-
-    // Met à jour le texte lorsque l'utilisateur est déjà inscrit
+    userForm.style.display = "none";
+    replayButton.style.display = "block";
     document.getElementById("intro-title").textContent = "Retente ta chance";
     document.getElementById("intro-text").textContent = "Jusqu'au 15 décembre";
   }
 });
+
+function displayScores() {
+  // Trier les scores du plus élevé au plus bas
+  scores.sort((a, b) => b.score - a.score);
+  const topScores = scores.slice(0, 10);
+
+  scoreboardBody.innerHTML = "";
+  topScores.forEach((entry) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${entry.firstName}</td>
+      <td>${entry.lastName}</td>
+      <td>${entry.score}</td>
+    `;
+    scoreboardBody.appendChild(row);
+  });
+}
+
+function addScoreToBoard(firstName, lastName, score) {
+  scores.push({ firstName, lastName, score });
+  displayScores();
+}
+
+displayScores();

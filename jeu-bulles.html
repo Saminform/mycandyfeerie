@@ -24,6 +24,24 @@
     <div id="intro-screen" class="intro-screen">
       <h2 id="intro-title">Bienvenue dans le Jeu des Bulles !</h2>
       <p id="intro-text">Remplissez le formulaire pour tenter votre chance!</p>
+      <p id="final-score">Ton score : 0</p>
+
+      <div id="scoreboard-container">
+        <h2>Tableau des Scores</h2>
+        <table id="scoreboard">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody id="scoreboard-body">
+            <!-- Les scores seront ajoutés ici dynamiquement -->
+          </tbody>
+        </table>
+      </div>
+
       <form id="user-form">
         <input type="text" id="first-name" placeholder="Prénom" required />
         <input type="text" id="last-name" placeholder="Nom" required />

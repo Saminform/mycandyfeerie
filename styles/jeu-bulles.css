@@ -1,5 +1,6 @@
 body {
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,10 +82,24 @@ nav::before {
 }
 
 .intro-screen {
+  width: 40vw;
+  height: 80vh;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: auto;
+  text-align: center;
+  background-image: url(../assets/cercle.jpeg);
+  opacity: 0.9;
+  color: rgb(2, 2, 173);
+  border: 5px solid red;
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 9;
 }
 
-/* Styles pour les champs de formulaire et le bouton */
 #user-form {
   display: flex;
   flex-direction: column;
@@ -101,9 +116,10 @@ nav::before {
 #start-button,
 #replayButton,
 #quit-button {
+  text-transform: uppercase;
   background-color: #4caf50;
-  color: white;
-  font-size: 1rem;
+  color: blue;
+  font-size: 2rem;
   padding: 10px;
   border: none;
   border-radius: 4px;
@@ -112,7 +128,7 @@ nav::before {
 }
 #quit-button {
   position: absolute;
-  top: 10%;
+  top: 12%;
   left: 90%;
 }
 
@@ -124,14 +140,18 @@ nav::before {
 .overlay-image {
   position: absolute;
   top: 50%;
-  left: 20%;
+  left: 15%;
   transform: translate(-50%, -50%);
-  max-width: 80vw;
+  max-width: 30vw;
   height: auto;
 }
 
-.countdown {
-  font-size: 10rem;
+#countdown {
+  font-size: 20rem;
+}
+#score-display {
+  font-size: 20rem;
+  color: blue;
 }
 
 .progress-bar {
@@ -143,12 +163,40 @@ nav::before {
   transition: width 1s linear;
 }
 
-#score-display {
-  font-size: 10rem;
-  color: red;
-  position: fixed;
-  top: 50%;
-  right: 50%;
+#scoreboard-container {
+  text-align: center;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 600px;
+}
+
+#scoreboard {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#scoreboard th,
+#scoreboard td {
+  border: 1px solid (2, 2, 173);
+  padding: 8px;
+}
+
+#scoreboard th {
+  background-color: #66ec5d;
+  color: w(2, 2, 173);
+}
+
+#add-score-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#final-score {
+  border-radius: 20px;
+  border: 10px solid red;
+  font-size: 4.5rem;
 }
 
 /* Style des bulles */
@@ -168,5 +216,136 @@ nav::before {
     left: var(--left);
     opacity: 1;
     filter: hue-rotate(720deg);
+  }
+}
+
+/* Adaptation pour les écrans de tablette (768px - 1024px) */
+@media (max-width: 1024px) {
+  .intro-screen {
+    width: 60vw;
+    height: auto;
+    padding: 20px;
+  }
+
+  #scoreboard-container {
+    width: 90%;
+    max-width: 500px;
+  }
+
+  .overlay-image {
+    max-width: 20vw;
+    left: 10%;
+    transform: translate(-50%, -50%);
+  }
+
+  #score-display,
+  #countdown {
+    font-size: 10rem;
+  }
+
+  .nav-right a {
+    font-size: 16px;
+    padding: 0 30px;
+  }
+}
+
+/* Adaptation pour les écrans mobiles (moins de 768px) */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .nav-left h4 {
+    font-size: 18px;
+  }
+
+  .nav-right a {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+
+  .intro-screen {
+    width: 90vw;
+    height: auto;
+    padding: 15px;
+  }
+
+  #user-form input {
+    font-size: 0.9rem;
+  }
+
+  #start-button,
+  #replayButton,
+  #quit-button {
+    font-size: 1.5rem;
+    padding: 8px;
+  }
+
+  .overlay-image {
+    max-width: 40vw;
+    left: 50%;
+    top: 88%;
+    transform: translate(-50%, -50%);
+  }
+
+  #countdown,
+  #score-display {
+    font-size: 6rem;
+  }
+
+  #scoreboard-container {
+    width: 95%;
+    max-width: 400px;
+  }
+
+  #final-score {
+    font-size: 3rem;
+  }
+}
+
+/* Pour les petits écrans (moins de 480px) */
+@media (max-width: 480px) {
+  .intro-screen {
+    width: 100%;
+    height: auto;
+    padding: 8px;
+    font-size: 0.6rem;
+  }
+
+  #user-form input {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+
+  #start-button,
+  #replayButton,
+  #quit-button {
+    font-size: 1.1rem;
+    padding: 6px;
+  }
+
+  .overlay-image {
+    max-width: 15vw;
+    top: 96%;
+  }
+
+  #countdown,
+  #score-display {
+    font-size: 4rem;
+  }
+
+  #scoreboard-container {
+    width: 90%;
+    padding: 8px;
+  }
+
+  #final-score {
+    font-size: 1.6rem;
   }
 }
