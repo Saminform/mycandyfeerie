@@ -17,24 +17,70 @@ const VoiceModule = {
 
     return frenchFemaleVoices.length > 0 ? frenchFemaleVoices[0] : voices[0];
   },
-
-  playMessage(prenom = "ami") {
-    const messages = [
-      `Coucou ${prenom} ! J'ai un petit message du Père Noël ! Tu as été très gentil durant cette année, alors bravo, tu es sur la bonne voie pour recevoir ton joli cadeau ! On compte sur toi ! Tous les lutins te font d'énormes bisous !`,
-      `Bonjour ${prenom} ! Le Père Noël m'a demandé de te dire qu'il est très fier de toi cette année. Continue ainsi et un super cadeau t'attend ! Gros bisous des lutins !`,
-      `Coucou ! On dirait que Noël approche ? ${prenom}, tu as vraiment bien travaillé cette année, et ton cadeau est en route. Bravo et joyeux Noël !`,
-      `Salut ${prenom} ! Le Père Noël m'a dit que tu as été exemplaire cette année ! Un beau cadeau est en préparation pour toi. Joyeux Noël et à très bientôt !`,
-      `Coucou ${prenom} ! Les lutins m'ont dit que tu as été adorable toute l'année. Un cadeau spécial est prêt pour toi. Joyeux Noël de la part du Père Noël et des lutins !`,
-    ];
-
-    const message = messages[Math.floor(Math.random() * messages.length)];
-    const utterance = new SpeechSynthesisUtterance(message);
-    utterance.lang = "fr-FR";
-    utterance.voice = this.loadVoices();
-
-    synth.speak(utterance);
-  },
 };
+
+function playMessage(prenom) {
+  const messages = [
+    {
+      audio: "./assets/audio/lutin2.mp3",
+    },
+    {
+      audio: "./assets/audio/lutin1.mp3",
+    },
+    {
+      audio: "./assets/audio/lutin3.mp3",
+    },
+    {
+      audio: "./assets/audio/lutin4.mp3",
+    },
+    {
+      audio: "./assets/audio/Pereno1.mp3",
+    },
+  ];
+
+  // Sélectionne un message aléatoire dans le tableau
+  const message = messages[Math.floor(Math.random() * messages.length)];
+
+  // Charge la voix française féminine
+  const selectedVoice = VoiceModule.loadVoices();
+
+  // Création de l'introduction avec le prénom et la voix française
+  const introMessage = `Coucou ${prenom} ! il ya un message pour toi. Peut-être aura tu celui du Père Noël!`;
+  const introSpeech = new SpeechSynthesisUtterance(introMessage);
+  introSpeech.voice = selectedVoice; // Définit la voix française sélectionnée
+
+  // Lecture de l'audio MP3 après l'introduction
+  introSpeech.onend = () => {
+    const audio = new Audio(message.audio);
+    audio.play();
+  };
+
+  // Démarre la lecture de l'introduction
+  window.speechSynthesis.speak(introSpeech);
+}
+
+// Vérifie si la touche "Entrée" est pressée dans le champ de texte
+function verifierEntree(event) {
+  if (event.key === "Enter") {
+    lireMessage();
+  }
+}
+
+// Fonction pour capturer le prénom et jouer le message
+function lireMessage() {
+  const prenomInput = document.getElementById("prenom");
+  const prenom = prenomInput.value.trim(); // Récupère le prénom
+
+  if (prenom) {
+    playMessage(prenom); // Joue le message avec le prénom
+  } else {
+    alert("Veuillez entrer votre prénom pour écouter le message.");
+  }
+}
+
+// Ajoute un événement de clic pour le bouton "Écouter"
+document.getElementById("ecouterBtn").addEventListener("click", lireMessage);
+
 // ________________________________________________________L U T I N S__________________________________________
 // Module de gestion des lutins
 const LutinModule = {

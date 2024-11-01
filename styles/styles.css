@@ -305,6 +305,7 @@ nav::before {
 
 /* Styles des titres, labels, et boutons */
 h1 {
+  z-index: 999;
   position: absolute;
   top: 8vh;
   left: 50vw;
@@ -460,6 +461,9 @@ footer::before {
     width: 100%;
   }
 }
+.lutinListen {
+  top: -150px;
+}
 
 @media (max-width: 1200px) {
   .container {
@@ -542,6 +546,9 @@ footer::before {
     height: auto;
     overflow-y: auto;
   }
+  h1 {
+    z-index: 999;
+  }
 
   .lutin-container,
   .lutinListen {
@@ -592,7 +599,7 @@ footer::before {
   }
 
   .lutin-chef {
-    z-index: 999;
+    z-index: 998;
     width: 50vw;
     top: -11vh;
   }
@@ -600,7 +607,7 @@ footer::before {
   #arche {
     font-size: 2.5rem; /* Proportionnel à LutinChef en mobile */
     text-align: center;
-    top: -110%;
+    top: -108%;
   }
 
   footer {
